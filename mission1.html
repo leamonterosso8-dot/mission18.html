@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission 18 - Chasse au trésor</title>
+  <style>
+    body {
+      background-color: #FFFFFF;
+      color: #FF0000;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .container {
+      max-width: 700px;
+      padding: 20px;
+      border: 2px solid #FF0000;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #FF0000;
+    }
+    h1 {
+      font-size: 2em;
+    }
+    .step {
+      display: none;
+      margin-top: 20px;
+    }
+    .visible {
+      display: block;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      background: #FF0000;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #cc0000;
+    }
+    .feedback {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .clue {
+      display: none;
+      margin-top: 15px;
+      color: #FF0000;
+      font-weight: bold;
+    }
+    img {
+      height: 50px;
+      margin: 0 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>MISSION 18 - Chasse au trésor</h1>
+
+    <!-- Introduction -->
+    <div id="step1" class="step visible">
+      <p><strong>Agent Louca MONTEROSSO,</strong><br>
+      Votre prochaine mission si vous l'acceptez est de découvrir la voiture qui vous accompagnera pour le début de votre vie d'adulte.</p>
+      <p><strong>Et pour cela vous devrez répondre correctement aux 4 questions qui suivent.</strong></p>
+      <button onclick="nextStep(2)">Commencer la mission</button>
+    </div>
+
+    <!-- Question 1 -->
+    <div id="step2" class="step">
+      <p><strong>Question 1 :</strong><br>Quelle sera la marque de votre véhicule ?</p>
+      <button onclick="checkAnswer(2, false)">FIAT</button>
+      <button onclick="checkAnswer(2, true)">BMW</button>
+      <button onclick="checkAnswer(2, false)">RENAULT</button>
+      <div id="clue2" class="clue">
+        L'indice du lieu de cette prochaine question est :<br>
+        <em>je suis noire, j'ai une grande langue et un peu surexcitée.</em>
+      </div>
+      <div id="feedback2" class="feedback"></div>
+    </div>
+
+    <!-- Question 2 -->
+    <div id="step3" class="step">
+      <p><strong>Question 2 :</strong><br>Quel est la couleur de votre voiture</p>
+      <button onclick="checkAnswer(3, false)">Jaune</button>
+      <button onclick="checkAnswer(3, true)">Bleue</button>
+      <button onclick="checkAnswer(3, false)">Noire</button>
+      <div id="clue3" class="clue">
+        La prochaine question se trouve sur le panneau de votre ville en direction de Clouange.
+      </div>
+      <div id="feedback3" class="feedback"></div>
+    </div>
+
+    <!-- Question 3 -->
+    <div id="step4" class="step">
+      <p><strong>Question 3 :</strong><br>Quel est le modèle de votre future voiture ?</p>
+      <button onclick="checkAnswer(4, false)">Punto</button>
+      <button onclick="checkAnswer(4, false)">Mégane</button>
+      <button onclick="checkAnswer(4, true)">Série 1</button>
+      <div id="clue4" class="clue">
+        Coordonnées GPS : (49.263416, 6.100390)
+      </div>
+      <div id="feedback4" class="feedback"></div>
+    </div>
+
+    <!-- Question 4 -->
+    <div id="step5" class="step">
+      <p><strong>Question 4 :</strong><br>Quelle est la finition de votre future voiture ?</p>
+      <button onclick="checkAnswer(5, false)">RS</button>
+      <button onclick="checkAnswer(5, false)">Abarth</button>
+      <button onclick="checkAnswer(5, true)">Urban</button>
+      <div id="clue5" class="clue">
+        Déchiffre le rébus : <br>
+        <strong>7 x 2 = ?</strong><br>
+        Rue
+        <strong>10</strong>
+        Riz
+        +
+        Sceau
+      </div>
+      <div id="feedback5" class="feedback"></div>
+    </div>
+
+    <!-- Fin -->
+    <div id="step6" class="step">
+      <p><strong>Le nom du contact est surnommé "bâtard"<br>
+      Pour finir la mission tu dois dire à bâtard la marque, le modèle, la couleur et la finition de ta voiture <br>
+      <span style="font-size:1.5em">🚗 Ta TWINGO ! 🚗</span></p>
+    </div>
+  </div>
+
+  <script>
+    function nextStep(step) {
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('visible'));
+      document.getElementById('step' + step).classList.add('visible');
+    }
+
+    function checkAnswer(step, correct) {
+      const feedback = document.getElementById('feedback' + step);
+      if (correct) {
+        feedback.style.color = 'lime';
+        feedback.textContent = '✔ Correct !';
+
+        // Affiche les indices cachés
+        if (step === 2) document.getElementById('clue2').style.display = 'block';
+        if (step === 3) document.getElementById('clue3').style.display = 'block';
+        if (step === 4) document.getElementById('clue4').style.display = 'block';
+        if (step === 5) document.getElementById('clue5').style.display = 'block';
+
+        setTimeout(() => nextStep(step + 1), 5000);
+      } else {
+        feedback.style.color = 'red';
+        let pompes = 0;
+        if (step === 2) pompes = 5;
+        if (step === 3) pompes = 10;
+        if (step === 4) pompes = 15;
+        if (step === 5) pompes = 20;
+        feedback.textContent = `❌ Faux, vous devrez effectuer ${pompes} pompes pour continuer.`;
+      }
+    }
+  </script>
+</body>
+</html>
