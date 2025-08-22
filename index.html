@@ -81,7 +81,7 @@
       <button onclick="checkAnswer(2, false)">RENAULT</button>
       <div id="clue2" class="clue">
         L'indice du lieu de cette prochaine question est :<br>
-        <em>je suis noire, j'ai une grande langue et un peu surexcitée.</em>
+        <em>Sortez de la maison a pied et marchez en direction de Clouange.</em>
       </div>
       <div id="feedback2" class="feedback"></div>
     </div>
@@ -93,7 +93,7 @@
       <button onclick="checkAnswer(3, true)">Bleue</button>
       <button onclick="checkAnswer(3, false)">Noire</button>
       <div id="clue3" class="clue">
-        La prochaine question se trouve sur le panneau de votre ville en direction de Clouange.
+        Dirigez vous maintenant jusqu'au croisement.
       </div>
       <div id="feedback3" class="feedback"></div>
     </div>
@@ -154,7 +154,7 @@
         if (step === 4) document.getElementById('clue4').style.display = 'block';
         if (step === 5) document.getElementById('clue5').style.display = 'block';
 
-        setTimeout(() => nextStep(step + 1), 5000);
+        setTimeout(() => nextStep(step + 1), 8000);
       } else {
         feedback.style.color = 'red';
         let pompes = 0;
@@ -168,3 +168,4 @@
   </script>
 </body>
 </html>
+
